@@ -1,0 +1,7 @@
+setup.py
+/home/ub/Desktop/sparse3dgs/shencoder/src/bindings.cpp
+/home/ub/Desktop/sparse3dgs/shencoder/src/shencoder.cu
+shencoder.egg-info/PKG-INFO
+shencoder.egg-info/SOURCES.txt
+shencoder.egg-info/dependency_links.txt
+shencoder.egg-info/top_level.txt
