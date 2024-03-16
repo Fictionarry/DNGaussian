@@ -23,11 +23,11 @@ python metrics.py --model_path $workspace
 
 
 
-## For the later scenes, we only apply hard depth since the number of views are enough to ignore soft depth supervision.
+## For the later scenes, we do not need to apply soft depth supervision.
 
 ## for      ship, lego, ficus, hotdog     SH peforms better
 
-# python train_blender_sh.py -s $dataset --model_path $workspace -r 2 --eval --n_sparse 8 --rand_pcd --iterations 6000 --lambda_dssim 0.2 --white_background \
+# python train_blender.py -s $dataset --model_path $workspace -r 2 --eval --n_sparse 8 --rand_pcd --iterations 6000 --lambda_dssim 0.2 --white_background \
 #             --densify_grad_threshold 0.0002 --prune_threshold 0.005 --densify_until_iter 6000 --percent_dense 0.01 \
 #             --densify_from_iter 500 \
 #             --position_lr_init 0.00016 --position_lr_final 0.0000016 --position_lr_max_steps 6000 --position_lr_start 0 \
@@ -36,6 +36,7 @@ python metrics.py --model_path $workspace
 #             --error_tolerance 0.2 \
 #             --scaling_lr 0.005 \
 #             --shape_pena 0.000 --opa_pena 0.000 --scale_pena 0.000 \
+#             --use_SH
 
 # python render_sh.py -s $dataset --model_path $workspace -r 2
 # python metrics.py --model_path $workspace 
@@ -45,7 +46,7 @@ python metrics.py --model_path $workspace
 
 ## for      chair, mic       the sampled views has a fully covering range so the model do not need monocular depth any more....
 
-# python train_blender_sh.py -s $dataset --model_path $workspace -r 2 --eval --n_sparse 8 --rand_pcd --iterations 30000 --lambda_dssim 0.2 --white_background \
+# python train_blender.py -s $dataset --model_path $workspace -r 2 --eval --n_sparse 8 --rand_pcd --iterations 30000 --lambda_dssim 0.2 --white_background \
 #             --densify_grad_threshold 0.0002 --prune_threshold 0.005 --densify_until_iter 15000 --percent_dense 0.01 \
 #             --densify_from_iter 500 \
 #             --position_lr_init 0.00016 --position_lr_final 0.0000016 --position_lr_max_steps 30000 --position_lr_start 0 \
@@ -54,6 +55,7 @@ python metrics.py --model_path $workspace
 #             --error_tolerance 0.2 \
 #             --scaling_lr 0.005 \
 #             --shape_pena 0.000 --opa_pena 0.000 --scale_pena 0.000 \
+#             --use_SH
 
 # python render_sh.py -s $dataset --model_path $workspace -r 2
 # python metrics.py --model_path $workspace 

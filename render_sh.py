@@ -10,16 +10,16 @@
 #
 
 import torch
-from scene_sh import Scene
+from scene_mix import Scene
 import os
 from tqdm import tqdm
 from os import makedirs
-from gaussian_renderer_sh import render
+from gaussian_renderer_mix import render_sh
 import torchvision
 from utils.general_utils import safe_state
 from argparse import ArgumentParser
 from arguments import ModelParams, PipelineParams, get_combined_args
-from gaussian_renderer_sh import GaussianModel
+from gaussian_renderer_mix import GaussianModelSH
 
 
 
@@ -108,7 +108,7 @@ def render_set(model_path, name, iteration, views, gaussians, pipeline, backgrou
     makedirs(depth_path, exist_ok=True)
 
     for idx, view in enumerate(tqdm(views, desc="Rendering progress", ascii=True, dynamic_ncols=True)):
-        render_pkg = render(view, gaussians, pipeline, background)
+        render_pkg = render_sh(view, gaussians, pipeline, background)
         rendering = render_pkg["render"]
         gt = view.original_image[0:3, :, :]
         depth = 1.0 - (render_pkg['depth'] - render_pkg['depth'].min()) / (render_pkg['depth'].max() - render_pkg['depth'].min())
@@ -125,7 +125,7 @@ def render_set(model_path, name, iteration, views, gaussians, pipeline, backgrou
 
 def render_sets(dataset : ModelParams, iteration : int, pipeline : PipelineParams, skip_train : bool, skip_test : bool):
     with torch.no_grad():
-        gaussians = GaussianModel(dataset.sh_degree)
+        gaussians = GaussianModelSH(dataset.sh_degree)
         scene = Scene(dataset, gaussians, load_iteration=iteration, shuffle=False)
 
         bg_color = [1,1,1] if dataset.white_background else [0, 0, 0]

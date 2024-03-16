@@ -94,7 +94,7 @@ If encountering installation problem of the `diff-gaussian-rasterization` or `gr
    ```bash
    # for example
    # there are some special settings for different scenes in the Blender dataset, please refer to "run_blender.sh".
-   bash scripts/run_blender.sh data/nerf_synthetic/chair output/blender/chair ${gpu_id}
+   bash scripts/run_blender.sh data/nerf_synthetic/drums output/blender/drums ${gpu_id}
    ```
 
 
