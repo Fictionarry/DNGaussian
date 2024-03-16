@@ -3,6 +3,8 @@ workspace=$2
 export CUDA_VISIBLE_DEVICES=$3
 
 
+## (sorry for that this part is not so elegent)
+
 
 ## for     materials, drums
 
@@ -21,7 +23,7 @@ python metrics.py --model_path $workspace
 
 
 
-## For the later scenes, we only apply hard depth to Blender dataset, since the number of views are enough to ignore soft depth supervision.
+## For the later scenes, we only apply hard depth since the number of views are enough to ignore soft depth supervision.
 
 ## for      ship, lego, ficus, hotdog     SH peforms better
 
