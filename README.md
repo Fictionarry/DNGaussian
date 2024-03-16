@@ -93,7 +93,7 @@ If encountering installation problem of the `diff-gaussian-rasterization` or `gr
 
    ```bash
    # for example
-   # there are some special settings for different scenes in Blender dataset, please refer to "run_blender.sh".
+   # there are some special settings for different scenes in the Blender dataset, please refer to "run_blender.sh".
    bash scripts/run_blender.sh data/nerf_synthetic/chair output/blender/chair ${gpu_id}
    ```
 
@@ -101,11 +101,11 @@ If encountering installation problem of the `diff-gaussian-rasterization` or `gr
 ## Reproducing Results
 Due to the randomness of the densification process and random initialization, the metrics may be unstable in some scenes, especially PSNR. If more stable performance is needed, we recommend trying the dense initialization from [FSGS](https://github.com/VITA-Group/FSGS).
 
-Checkpoints and produced results are in preparation to release.
+You can download our provided checkpoints from [here](https://drive.google.com/drive/folders/1V8XGg1MXJDb-bK3NAEo5Gw2GLLByF7FM?usp=sharing). These results are reproduced with a lower error tolerance bound to keep aligned with this repo, which is different from what we use in the paper. This could lead to higher metrics but worse visualization.
 
 
 ## Customized Dataset
-Similar to Gaussian Splatting, our method can read standard COLMAP format datasets. Please customize your sampling rule in `scenes/dataset_readers.py`, and see how to organize a COLMAP-format dataset from raw RGB images refer to our preprocessing of DTU.
+Similar to Gaussian Splatting, our method can read standard COLMAP format datasets. Please customize your sampling rule in `scenes/dataset_readers.py`, and see how to organize a COLMAP-format dataset from raw RGB images referring to our preprocessing of DTU.
 
 
 
