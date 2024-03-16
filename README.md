@@ -15,7 +15,7 @@ Tested on Ubuntu 18.04, CUDA 11.3, PyTorch 1.12.1
 conda env create --file environment.yml
 conda activate dngaussian
 ``````
-If encounter installation problem from the `diff-gaussian-rasterization` or `gridencoder`, please refer to [gaussian-splatting](https://github.com/graphdeco-inria/gaussian-splatting) and [torch-ngp](https://github.com/ashawkey/torch-ngp).
+If encountering installation problem of the `diff-gaussian-rasterization` or `gridencoder`, you may get some help from [gaussian-splatting](https://github.com/graphdeco-inria/gaussian-splatting) and [torch-ngp](https://github.com/ashawkey/torch-ngp).
 
 
 ## Evaluation
@@ -94,7 +94,6 @@ If encounter installation problem from the `diff-gaussian-rasterization` or `gri
    ```bash
    # for example
    # there are some special settings for different scenes in Blender dataset, please refer to "run_blender.sh".
-   # (sorry for that this part is not so elegent)
    bash scripts/run_blender.sh data/nerf_synthetic/chair output/blender/chair ${gpu_id}
    ```
 
