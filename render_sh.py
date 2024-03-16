@@ -10,16 +10,16 @@
 #
 
 import torch
-from scene_mix import Scene
+from scene import Scene
 import os
 from tqdm import tqdm
 from os import makedirs
-from gaussian_renderer_mix import render_sh
+from gaussian_renderer import render_sh
 import torchvision
 from utils.general_utils import safe_state
 from argparse import ArgumentParser
 from arguments import ModelParams, PipelineParams, get_combined_args
-from gaussian_renderer_mix import GaussianModelSH
+from gaussian_renderer import GaussianModelSH
 
 
 

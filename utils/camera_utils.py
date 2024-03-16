@@ -10,7 +10,7 @@
 #
 
 try:
-    from scene_mix.cameras import Camera
+    from scene.cameras import Camera
 except:
     from scene_sh.cameras import Camera
 import numpy as np

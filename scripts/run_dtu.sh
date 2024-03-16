@@ -16,7 +16,7 @@ python train_dtu.py --dataset DTU -s $dataset --model_path $workspace -r 4 --eva
 
 bash ./scripts/copy_mask_dtu.sh
 
-python render_mix.py -s $dataset --model_path $workspace -r 4
-python spiral_mix.py -s $dataset --model_path $workspace -r 4
+python render.py -s $dataset --model_path $workspace -r 4
+python spiral.py -s $dataset --model_path $workspace -r 4
 
 python metrics_dtu.py --model_path $workspace 

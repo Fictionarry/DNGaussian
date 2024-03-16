@@ -14,8 +14,8 @@ python train_llff.py  -s $dataset --model_path $workspace -r 8 --eval --n_sparse
 # set a larger "--error_tolerance" may get more smooth results in visualization
 
             
-python render_mix.py -s $dataset --model_path $workspace -r 8 --near 10  
-python spiral_mix.py -s $dataset --model_path $workspace -r 8 --near 10 
+python render.py -s $dataset --model_path $workspace -r 8 --near 10  
+python spiral.py -s $dataset --model_path $workspace -r 8 --near 10 
 
 
 python metrics.py --model_path $workspace 

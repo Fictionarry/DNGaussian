@@ -17,9 +17,9 @@ from random import randint
 from utils.graphics_utils import fov2focal
 from utils.loss_utils import l1_loss, patch_norm_mse_loss, patch_norm_mse_loss_global, ssim
 # from utils.loss_utils import mssim as ssim
-from gaussian_renderer_mix import render, render_for_depth, render_for_opa   # , network_gui
+from gaussian_renderer import render, render_for_depth, render_for_opa   # , network_gui
 import sys
-from scene_mix import Scene, GaussianModel
+from scene import Scene, GaussianModel
 from utils.general_utils import safe_state
 import uuid
 from tqdm import tqdm

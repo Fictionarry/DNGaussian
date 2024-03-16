@@ -17,11 +17,11 @@ from random import randint
 from utils.graphics_utils import fov2focal
 from utils.loss_utils import l1_loss, patch_norm_mse_loss, patch_norm_mse_loss_global, ssim
 # from utils.loss_utils import mssim as ssim
-from gaussian_renderer_mix import render, render_for_depth, render_for_opa   # , network_gui
-from gaussian_renderer_mix import render_sh, render_for_depth_sh   # , network_gui
+from gaussian_renderer import render, render_for_depth, render_for_opa   # , network_gui
+from gaussian_renderer import render_sh, render_for_depth_sh   # , network_gui
 
 import sys
-from scene_mix import Scene, GaussianModel,  GaussianModelSH
+from scene import Scene, GaussianModel,  GaussianModelSH
 
 from utils.general_utils import safe_state
 import uuid

@@ -13,9 +13,9 @@ import os
 import random
 import json
 from utils.system_utils import searchForMaxIteration
-from scene_mix.dataset_readers import sceneLoadTypeCallbacks
-from scene_mix.gaussian_model import GaussianModel
-from scene_mix.gaussian_model_sh import GaussianModelSH
+from scene.dataset_readers import sceneLoadTypeCallbacks
+from scene.gaussian_model import GaussianModel
+from scene.gaussian_model_sh import GaussianModelSH
 from arguments import ModelParams
 from utils.camera_utils import cameraList_from_camInfos, camera_to_JSON, renderCameraList_from_camInfos
 

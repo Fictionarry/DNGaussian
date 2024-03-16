@@ -18,7 +18,7 @@ python train_blender.py -s $dataset --model_path $workspace -r 2 --eval --n_spar
             --scaling_lr 0.005 \
             --shape_pena 0.000 --opa_pena 0.000 --scale_pena 0.000 \
 
-python render_mix.py -s $dataset --model_path $workspace -r 2
+python render.py -s $dataset --model_path $workspace -r 2
 python metrics.py --model_path $workspace 
 
 

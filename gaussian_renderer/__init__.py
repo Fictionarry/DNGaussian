@@ -12,8 +12,8 @@
 import torch
 import math
 from diff_gaussian_rasterization import GaussianRasterizationSettings, GaussianRasterizer
-from scene_mix.gaussian_model import GaussianModel
-from scene_mix.gaussian_model_sh import GaussianModelSH
+from scene.gaussian_model import GaussianModel
+from scene.gaussian_model_sh import GaussianModelSH
 from utils.sh_utils import eval_sh
 from utils.graphics_utils import fov2focal
 
