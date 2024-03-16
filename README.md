@@ -54,7 +54,7 @@ If encounter installation problem from the `diff-gaussian-rasterization` or `gri
    bash scripts/organize_dtu_dataset.sh $rectified_path
    ```
 
-3. Preprocess
+3. Format
 
    - Poses: following [gaussian-splatting](https://github.com/graphdeco-inria/gaussian-splatting), run `convert.py` to get the poses and the undistorted images by COLMAP.
    - Render Path: following [LLFF](https://github.com/Fyusion/LLFF) to get the `poses_bounds.npy` from the COLMAP data. (Optional)
@@ -94,6 +94,7 @@ If encounter installation problem from the `diff-gaussian-rasterization` or `gri
    ```bash
    # for example
    # there are some special settings for different scenes in Blender dataset, please refer to "run_blender.sh".
+   # (sorry for that this part is not so elegent)
    bash scripts/run_blender.sh data/nerf_synthetic/chair output/blender/chair ${gpu_id}
    ```
 
