@@ -101,28 +101,31 @@ If encountering installation problem of the `diff-gaussian-rasterization` or `gr
 ## Reproducing Results
 Due to the randomness of the densification process and random initialization, the metrics may be unstable in some scenes, especially PSNR.
 
+
+### Checkpoints and Results
+You can download our provided checkpoints from [here](https://drive.google.com/drive/folders/1V8XGg1MXJDb-bK3NAEo5Gw2GLLByF7FM?usp=sharing). These results are reproduced with a lower error tolerance bound to keep aligned with this repo, which is different from what we use in the paper. This could lead to higher metrics but worse visualization.
+
+
 ### MVS Point Cloud Initialization
 
 If more stable performance is needed, we recommend trying the dense initialization from [FSGS](https://github.com/VITA-Group/FSGS).
 
-Here we provide an example script for LLFF that just modifies a few hyperparameters to adapt our method to this initialization. 
+Here we provide an example script for LLFF that just modifies a few hyperparameters to adapt our method to this initialization:
 
 ```bash
 # Following FSGS to get the "data/llff/$<scene>/3_views/dense/fused.ply" first
 bash scripts/run_llff_mvs.sh data/llff/$<scene> output_dense/$<scene> ${gpu_id}
 ```
 
-The results we get on one random test are as below:
+However, there may still be some randomness.
+
+For reference, the best results we get in two random tests are as follows:
 
 | PSNR   | LPIPS  | SSIM (SK)   |  SSIM (GS)   |
 | ------ | ------ | ----- | ----- |
-| 19.900 | 0.231  | 0.681 | 0.686 |
+| 19.942 | 0.228  | 0.682 | 0.687 |
 
-where GS refers to the calculation in the currently released code of FSGS, originally provided by 3DGS, and SK denotes calculated by sklearn which is used in most previous NeRF-based methods.
-
-
-### Checkpoints and Results
-You can download our provided checkpoints from [here](https://drive.google.com/drive/folders/1V8XGg1MXJDb-bK3NAEo5Gw2GLLByF7FM?usp=sharing). These results are reproduced with a lower error tolerance bound to keep aligned with this repo, which is different from what we use in the paper. This could lead to higher metrics but worse visualization.
+where GS refers to the calculation originally provided by 3DGS, and SK denotes calculated by sklearn which is used in most previous NeRF-based methods.
 
 
 ## Customized Dataset
