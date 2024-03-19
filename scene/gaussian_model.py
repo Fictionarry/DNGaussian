@@ -523,10 +523,12 @@ class GaussianModel:
         self.prune_points(prune_mask)
         torch.cuda.empty_cache()
 
-    def add_densification_stats(self, viewspace_point_tensor, update_filter, accum_denom=True):
+    def add_densification_stats(self, viewspace_point_tensor, update_filter, accum_denom=True, add_random=True):
         # increase randomness to overcome local minima
-        self.xyz_gradient_accum[update_filter] += torch.norm((viewspace_point_tensor.grad - self._xyz.grad)[update_filter,:2], dim=-1, keepdim=True)
-        # self.xyz_gradient_accum[update_filter] += torch.norm((viewspace_point_tensor.grad)[update_filter,:2], dim=-1, keepdim=True)
+        if add_random:
+            self.xyz_gradient_accum[update_filter] += torch.norm((viewspace_point_tensor.grad - self._xyz.grad)[update_filter,:2], dim=-1, keepdim=True)
+        else:
+            self.xyz_gradient_accum[update_filter] += torch.norm((viewspace_point_tensor.grad)[update_filter,:2], dim=-1, keepdim=True)
         if accum_denom:
             self.denom[update_filter] += 1
 

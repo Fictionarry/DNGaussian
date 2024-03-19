@@ -56,6 +56,7 @@ class ModelParams(ParamGroup):
         self.data_device = "cuda:0"
         self.eval = False
         self.rand_pcd = False
+        self.mvs_pcd = False
         self.n_sparse = -1
         super().__init__(parser, "Loading Parameters", sentinel)
 
