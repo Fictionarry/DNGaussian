@@ -6,6 +6,9 @@ export CUDA_VISIBLE_DEVICES=$3
 ## (sorry for that this part is not so elegent)
 
 
+## For the later scenes, we do not need to apply soft depth supervision.
+
+
 ## for     materials, drums
 
 python train_blender.py -s $dataset --model_path $workspace -r 2 --eval --n_sparse 8 --rand_pcd --iterations 6000 --lambda_dssim 0.6 --white_background \
@@ -13,7 +16,7 @@ python train_blender.py -s $dataset --model_path $workspace -r 2 --eval --n_spar
             --densify_from_iter 500 \
             --position_lr_init 0.00016 --position_lr_final 0.0000016 --position_lr_max_steps 5500 --position_lr_start 500 \
             --test_iterations 1000 2000 3000 4500 6000 --save_iterations 1000 2000 3000 6000 \
-            --hard_depth_start 0 --soft_depth_start 99999 \
+            --hard_depth_start 0 --soft_depth_start 9999999 \
             --split_opacity_thresh 0.1 --error_tolerance 0.05 \
             --scaling_lr 0.005 \
             --shape_pena 0.000 --opa_pena 0.000 --scale_pena 0.000 \
@@ -23,7 +26,6 @@ python metrics.py --model_path $workspace
 
 
 
-## For the later scenes, we do not need to apply soft depth supervision.
 
 ## for      ship, lego, ficus, hotdog     SH peforms better
 
