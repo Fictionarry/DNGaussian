@@ -14,8 +14,6 @@ dependencies:
   - tqdm
 
   - pip:
-    - ./submodules/diff-gaussian-rasterization
-    - ./submodules/simple-knn
     - ./gridencoder
     - pillow
     - tensorboard

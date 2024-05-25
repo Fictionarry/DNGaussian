@@ -14,7 +14,13 @@ Tested on Ubuntu 18.04, CUDA 11.3, PyTorch 1.12.1
 ``````
 conda env create --file environment.yml
 conda activate dngaussian
+
+cd submodules
+git clone git@github.com:ashawkey/diff-gaussian-rasterization.git --recursive
+git clone https://gitlab.inria.fr/bkerbl/simple-knn.git
+pip install ./diff-gaussian-rasterization ./simple-knn
 ``````
+
 If encountering installation problem of the `diff-gaussian-rasterization` or `gridencoder`, you may get some help from [gaussian-splatting](https://github.com/graphdeco-inria/gaussian-splatting) and [torch-ngp](https://github.com/ashawkey/torch-ngp).
 
 

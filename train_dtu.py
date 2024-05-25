@@ -56,6 +56,8 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
     progress_bar = tqdm(range(first_iter, opt.iterations), desc="Training progress", ascii=True, dynamic_ncols=True)
     first_iter += 1
 
+    ema_loss_hard = 0.0
+
     if args.dataset == 'DTU':
         patch_range = (17, 53)
 
@@ -122,7 +124,8 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
 
 
         # -------------------------------------------------- soft --------------------------------------------
-        if iteration > opt.soft_depth_start :
+        ema_loss_hard = 0.1 * (loss_hard.item()) + 0.9 * ema_loss_hard
+        if iteration > opt.soft_depth_start and ema_loss_hard < 0.1:
             render_pkg = render_for_opa(viewpoint_cam, gaussians, pipe, background)
             viewspace_point_tensor, visibility_filter = render_pkg["viewspace_points"], render_pkg["visibility_filter"]
             depth, alpha = render_pkg["depth"], render_pkg["alpha"]
@@ -174,8 +177,6 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
         # scale_pena = (gaussians.get_scaling.max(dim=1).values).std()
         scale_pena = ((gaussians.get_scaling.max(dim=1, keepdim=True).values)**2).mean()
         opa_pena = 1 - (opacity[opacity > 0.2]**2).mean() + ((1 - opacity[opacity < 0.2])**2).mean()
-        if args.dataset == "DTU":
-            opa_pena = 1 - (opacity[opacity > 0.2]**2).mean() + ((1 - opacity[opacity < 0.2])**2).mean()
 
         # loss_reg += 0.01*shape_pena + 0.001*scale_pena + 0.01*opa_pena
         loss_reg += opt.shape_pena*shape_pena + opt.scale_pena*scale_pena + opt.opa_pena*opa_pena

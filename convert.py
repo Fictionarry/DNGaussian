@@ -16,7 +16,7 @@ import shutil
 
 # This Python script is based on the shell converter script provided in the MipNerF 360 repository.
 parser = ArgumentParser("Colmap converter")
-parser.add_argument("--gpu", action='store_true')
+parser.add_argument("--no_gpu", action='store_true')
 parser.add_argument("--skip_matching", action='store_true')
 parser.add_argument("--source_path", "-s", required=True, type=str)
 parser.add_argument("--camera", default="OPENCV", type=str)
@@ -26,7 +26,7 @@ parser.add_argument("--magick_executable", default="", type=str)
 args = parser.parse_args()
 colmap_command = '"{}"'.format(args.colmap_executable) if len(args.colmap_executable) > 0 else "colmap"
 magick_command = '"{}"'.format(args.magick_executable) if len(args.magick_executable) > 0 else "magick"
-use_gpu = 1 if args.gpu else 0
+use_gpu = 0 if args.no_gpu else 1
 
 if not args.skip_matching:
     os.makedirs(args.source_path + "/distorted/sparse", exist_ok=True)
@@ -58,7 +58,7 @@ if not args.skip_matching:
     mapper_cmd = (colmap_command + " mapper \
         --database_path " + args.source_path + "/distorted/database.db \
         --image_path "  + args.source_path + "/input \
-        --export_path "  + args.source_path + "/distorted/sparse")
+        --output_path "  + args.source_path + "/distorted/sparse")
         # --Mapper.ba_global_function_tolerance=0.000001")
     exit_code = os.system(mapper_cmd)
     if exit_code != 0:
