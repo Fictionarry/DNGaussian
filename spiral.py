@@ -111,11 +111,11 @@ def render_set(model_path, name, iteration, views, gaussians, pipeline, backgrou
         with torch.no_grad():
             render_pkg = render(view, gaussians, pipeline, background, inference=True)
         rendering = render_pkg["render"]
-        depth = 1.0 - (render_pkg['depth'] - render_pkg['depth'].min()) / (render_pkg['depth'].max() - render_pkg['depth'].min())
+        depth = (render_pkg['depth'] - render_pkg['depth'].min()) / (render_pkg['depth'].max() - render_pkg['depth'].min()) + 1 * (1 - render_pkg["alpha"])
         torchvision.utils.save_image(rendering, os.path.join(render_path, '{0:05d}'.format(idx) + ".png"))
-        torchvision.utils.save_image(depth, os.path.join(render_path, 'depth_{0:05d}'.format(idx) + ".png"))
+        torchvision.utils.save_image(1 - depth, os.path.join(render_path, 'depth_{0:05d}'.format(idx) + ".png"))
 
-        depth_est = render_pkg['depth'].squeeze().cpu().numpy()
+        depth_est = depth.squeeze().cpu().numpy()
         depth_est = visualize_cmap(depth_est, np.ones_like(depth_est), cm.get_cmap('turbo'), curve_fn=depth_curve_fn).copy()
         depth_est = torch.as_tensor(depth_est).permute(2,0,1)
         torchvision.utils.save_image(depth_est, os.path.join(render_path, 'cdepth_{0:05d}'.format(idx) + ".png"))

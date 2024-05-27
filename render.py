@@ -116,13 +116,13 @@ def render_set(model_path, name, iteration, views, gaussians, pipeline, backgrou
         render_pkg = render(view, gaussians, pipeline, background, inference=True)
         rendering = render_pkg["render"]
         gt = view.original_image[0:3, :, :]
-        depth = 1.0 - (render_pkg['depth'] - render_pkg['depth'].min()) / (render_pkg['depth'].max() - render_pkg['depth'].min())
+        depth = (render_pkg['depth'] - render_pkg['depth'].min()) / (render_pkg['depth'].max() - render_pkg['depth'].min()) + 1 * (1 - render_pkg["alpha"])
         torchvision.utils.save_image(rendering, os.path.join(render_path, '{0:05d}'.format(idx) + ".png"))
         torchvision.utils.save_image(gt, os.path.join(gts_path, '{0:05d}'.format(idx) + ".png"))
-        torchvision.utils.save_image(depth, os.path.join(depth_path, '{0:05d}'.format(idx) + ".png"))
+        torchvision.utils.save_image(1 - depth, os.path.join(depth_path, '{0:05d}'.format(idx) + ".png"))
         torchvision.utils.save_image(render_pkg["alpha"], os.path.join(depth_path, 'alpha_{0:05d}'.format(idx) + ".png"))
 
-        depth_est = (1 - depth * render_pkg["alpha"]).squeeze().cpu().numpy()
+        depth_est = depth.squeeze().cpu().numpy()
         depth_est = visualize_cmap(depth_est, np.ones_like(depth_est), cm.get_cmap('turbo'), curve_fn=depth_curve_fn).copy()
         depth_est = torch.as_tensor(depth_est).permute(2,0,1)
         torchvision.utils.save_image(depth_est, os.path.join(depth_path, 'color_{0:05d}'.format(idx) + ".png"))
