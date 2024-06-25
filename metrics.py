@@ -78,7 +78,7 @@ def evaluate(model_paths):
 
                 for idx in tqdm(range(len(renders)), desc="Metric evaluation progress", ascii=True, dynamic_ncols=True):
                     ssims.append(ssim(renders[idx], gts[idx]))
-                    ssims_sk.append(structural_similarity(renders[idx][0].permute(1,2,0).cpu().numpy(), gts[idx][0].permute(1,2,0).cpu().numpy(), multichannel=True, data_range=1.0))
+                    ssims_sk.append(structural_similarity(renders[idx][0].permute(1,2,0).cpu().numpy(), gts[idx][0].permute(1,2,0).cpu().numpy(), multichannel=True, channel_axis=2 ,data_range=1.0))
                     psnrs.append(psnr(renders[idx], gts[idx]))
 
                     # Following previous works to keep the range of RGB in [0, 1].  (however, may be a mistake : https://github.com/richzhang/PerceptualSimilarity) 
